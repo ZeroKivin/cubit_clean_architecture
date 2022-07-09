@@ -12,6 +12,7 @@ class CountryListScreen extends StatelessWidget {
     return BlocProvider<CountryListCubit>(
       create: (context) => CountryListCubit(
         useCase: context.read<CountryCase>(),
+        scaffoldMessengerKey: context.read<GlobalKey<ScaffoldMessengerState>>(),
       )..init(),
       child: const CountryListScreenView(),
     );

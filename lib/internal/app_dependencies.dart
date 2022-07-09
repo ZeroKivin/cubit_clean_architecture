@@ -28,10 +28,13 @@ class _AppDependenciesState extends State<AppDependencies> {
   late final CountryClient _countryClient;
   late final ICountryRepository _countryRepository;
   late final CountryCase _countryUseCase;
+  late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
 
   @override
   void initState() {
     super.initState();
+
+    _scaffoldMessengerKey = GlobalKey();
 
     _httpClient = Dio();
     _logger = Logger(
@@ -41,6 +44,7 @@ class _AppDependenciesState extends State<AppDependencies> {
       ),
     );
     _errorHandler = ErrorHandler(_logger);
+
     _countryClient = CountryClient(
       httpClient: _httpClient,
       logger: _logger,
@@ -59,6 +63,9 @@ class _AppDependenciesState extends State<AppDependencies> {
         Provider<CountryCase>(
           create: (_) => _countryUseCase,
         ),
+        Provider<GlobalKey<ScaffoldMessengerState>>(
+          create: (_) => _scaffoldMessengerKey,
+        )
       ],
       child: widget.app,
     );

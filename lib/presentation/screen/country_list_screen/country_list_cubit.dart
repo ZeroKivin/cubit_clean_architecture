@@ -9,16 +9,18 @@ part 'country_list_state.dart';
 class CountryListCubit extends Cubit<CountryListState> {
   CountryListCubit({
     required this.useCase,
+    required this.scaffoldMessengerKey,
   }) : super(const CountryListState());
 
   final CountryCase useCase;
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey;
 
   void init() {
     _loadCountryList();
   }
 
-  void showErrorSnackBar(BuildContext context, SnackBar snackBar) {
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  void showErrorSnackBar(SnackBar snackBar) {
+    scaffoldMessengerKey.currentState?.showSnackBar(snackBar);
   }
 
   void refresh() {

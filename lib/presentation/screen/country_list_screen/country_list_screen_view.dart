@@ -23,7 +23,6 @@ class CountryListScreenView extends StatelessWidget {
         listener: (context, state) {
           if (state.status == CountryListStatus.error) {
             bloc.showErrorSnackBar(
-              context,
               SnackBar(
                 content: Text(
                   state.errorText!,
