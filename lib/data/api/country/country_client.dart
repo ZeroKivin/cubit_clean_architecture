@@ -4,7 +4,7 @@ import 'package:cubit_clean_architecture/data/endpoint/get_all_country.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
-class CountryClient extends IClient {
+class CountryClient extends Client {
   CountryClient({
     required this.httpClient,
     required Logger logger,

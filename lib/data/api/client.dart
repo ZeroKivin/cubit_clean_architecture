@@ -1,8 +1,8 @@
 import 'package:cubit_clean_architecture/utility/url/endpoint.dart';
 import 'package:logger/logger.dart';
 
-abstract class IClient {
-  IClient({
+abstract class Client {
+  Client({
     required this.logger,
   });
 
