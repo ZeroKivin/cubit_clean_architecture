@@ -1,5 +1,5 @@
-import 'package:cubit_clean_architecture/domain/entity/country/country.dart';
-import 'package:cubit_clean_architecture/domain/use_case/country/country_case.dart';
+import 'package:cubit_clean_architecture/feature/country_list/domain/entity/country/country.dart';
+import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country/country_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

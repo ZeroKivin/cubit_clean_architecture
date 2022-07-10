@@ -1,12 +1,11 @@
-import 'package:cubit_clean_architecture/data/api/country/country_client.dart';
-import 'package:cubit_clean_architecture/data/repository/country_repository.dart';
-import 'package:cubit_clean_architecture/domain/repository/country_repository.dart';
-import 'package:cubit_clean_architecture/domain/use_case/country/country_case.dart';
-import 'package:cubit_clean_architecture/presentation/app.dart';
-import 'package:cubit_clean_architecture/utility/error/error_handler.dart';
+import 'package:clean_business_logic/clean_business_logic.dart';
+import 'package:cubit_clean_architecture/feature/country_list/data/api/country/country_client.dart';
+import 'package:cubit_clean_architecture/feature/country_list/data/repository/country_repository.dart';
+import 'package:cubit_clean_architecture/feature/country_list/domain/repository/country_repository.dart';
+import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country/country_case.dart';
+import 'package:cubit_clean_architecture/internal/app.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class AppDependencies extends StatefulWidget {
@@ -22,7 +21,6 @@ class AppDependencies extends StatefulWidget {
 }
 
 class _AppDependenciesState extends State<AppDependencies> {
-  late final Logger _logger;
   late final ErrorHandler _errorHandler;
   late final Dio _httpClient;
   late final CountryClient _countryClient;
@@ -37,17 +35,10 @@ class _AppDependenciesState extends State<AppDependencies> {
     _scaffoldMessengerKey = GlobalKey();
 
     _httpClient = Dio();
-    _logger = Logger(
-      printer: PrettyPrinter(
-        methodCount: 4,
-        printTime: true,
-      ),
-    );
-    _errorHandler = ErrorHandler(_logger);
+    _errorHandler = ErrorHandler();
 
     _countryClient = CountryClient(
       httpClient: _httpClient,
-      logger: _logger,
     );
     _countryRepository = CountryRepository(_countryClient);
     _countryUseCase = CountryCase(

@@ -1,7 +1,6 @@
-import 'package:cubit_clean_architecture/domain/entity/country/country.dart';
-import 'package:cubit_clean_architecture/domain/repository/country_repository.dart';
-import 'package:cubit_clean_architecture/domain/use_case/use_case.dart';
-import 'package:cubit_clean_architecture/utility/error/error_handler.dart';
+import 'package:clean_business_logic/clean_business_logic.dart';
+import 'package:cubit_clean_architecture/feature/country_list/domain/entity/country/country.dart';
+import 'package:cubit_clean_architecture/feature/country_list/domain/repository/country_repository.dart';
 
 class CountryCase extends UseCase {
   final ICountryRepository repository;

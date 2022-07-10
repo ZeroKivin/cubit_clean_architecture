@@ -12,14 +12,16 @@ dependencies:
   flutter:
     sdk: flutter
 
+  clean_business_logic:
+    git:
+      url: 'https://github.com/ZeroKivin/clean_business_logic.git'
+
   cupertino_icons: ^1.0.2
   flutter_bloc:
   dio:
-  retrofit:
   provider:
   json_annotation:
   equatable:
-  logger:
 
 dev_dependencies:
   flutter_test:

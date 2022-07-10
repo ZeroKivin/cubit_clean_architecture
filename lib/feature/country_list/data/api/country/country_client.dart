@@ -1,14 +1,12 @@
-import 'package:cubit_clean_architecture/data/api/client.dart';
-import 'package:cubit_clean_architecture/data/dto/country_data.dart';
-import 'package:cubit_clean_architecture/data/endpoint/get_all_country.dart';
+import 'package:clean_business_logic/clean_business_logic.dart';
+import 'package:cubit_clean_architecture/feature/country_list/data/dto/country_data.dart';
+import 'package:cubit_clean_architecture/feature/country_list/data/endpoint/get_all_country.dart';
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 
 class CountryClient extends Client {
   CountryClient({
     required this.httpClient,
-    required Logger logger,
-  }) : super(logger: logger);
+  });
 
   final Dio httpClient;
 

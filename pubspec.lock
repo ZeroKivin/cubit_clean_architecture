@@ -120,6 +120,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  clean_business_logic:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: dd315eaf195d71fa3e51f13043fab7659478978c
+      url: "https://github.com/ZeroKivin/clean_business_logic.git"
+    source: git
+    version: "0.0.1"
   clock:
     dependency: transitive
     description:
@@ -299,7 +308,7 @@ packages:
     source: hosted
     version: "2.0.0"
   logger:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: logger
       url: "https://pub.dartlang.org"
@@ -397,7 +406,7 @@ packages:
     source: hosted
     version: "3.1.0"
   retrofit:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: retrofit
       url: "https://pub.dartlang.org"
@@ -542,5 +551,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.17.3 <3.0.0"
+  dart: ">=2.17.5 <3.0.0"
   flutter: ">=1.16.0"

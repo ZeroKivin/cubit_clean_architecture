@@ -1,6 +1,6 @@
-import 'package:cubit_clean_architecture/presentation/screen/country_list_screen/country_list_screen.dart';
+import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_screen/country_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
