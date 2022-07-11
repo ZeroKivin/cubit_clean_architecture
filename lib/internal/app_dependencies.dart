@@ -1,10 +1,10 @@
-import 'package:clean_business_logic/clean_business_logic.dart';
-import 'package:cubit_clean_architecture/feature/country_list/data/api/country/country_client.dart';
+import 'package:cubit_clean_architecture/feature/country_list/data/api/country_client.dart';
 import 'package:cubit_clean_architecture/feature/country_list/data/repository/country_repository.dart';
 import 'package:cubit_clean_architecture/feature/country_list/domain/repository/country_repository.dart';
-import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country/country_case.dart';
+import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country_case.dart';
 import 'package:cubit_clean_architecture/internal/app.dart';
-import 'package:dio/dio.dart';
+import 'package:cubit_clean_architecture/utility/error/error_handler.dart';
+import 'package:cubit_clean_architecture/utility/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +21,8 @@ class AppDependencies extends StatefulWidget {
 }
 
 class _AppDependenciesState extends State<AppDependencies> {
-  late final ErrorHandler _errorHandler;
-  late final Dio _httpClient;
+  late final DefaultLogger _logger;
+  late final DefaultErrorHandler _errorHandler;
   late final CountryClient _countryClient;
   late final ICountryRepository _countryRepository;
   late final CountryCase _countryUseCase;
@@ -34,15 +34,17 @@ class _AppDependenciesState extends State<AppDependencies> {
 
     _scaffoldMessengerKey = GlobalKey();
 
-    _httpClient = Dio();
-    _errorHandler = ErrorHandler();
+    _logger = DefaultLogger();
+    _errorHandler = DefaultErrorHandler();
 
-    _countryClient = CountryClient(
-      httpClient: _httpClient,
+    _countryClient = CountryClient(_logger);
+    _countryRepository = CountryRepository(
+      client: _countryClient,
+      logger: _logger,
     );
-    _countryRepository = CountryRepository(_countryClient);
     _countryUseCase = CountryCase(
       repository: _countryRepository,
+      logger: _logger,
       errorHandler: _errorHandler,
     );
   }

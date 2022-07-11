@@ -1,14 +1,10 @@
 import 'package:clean_business_logic/clean_business_logic.dart';
 import 'package:cubit_clean_architecture/feature/country_list/data/dto/country_data.dart';
 import 'package:cubit_clean_architecture/feature/country_list/data/endpoint/get_all_country.dart';
-import 'package:dio/dio.dart';
+import 'package:cubit_clean_architecture/utility/logger/logger.dart';
 
-class CountryClient extends Client {
-  CountryClient({
-    required this.httpClient,
-  });
-
-  final Dio httpClient;
+class CountryClient extends Client with HttpClient {
+  CountryClient(DefaultLogger logger) : super(logger: logger);
 
   Future<List<CountryData>> getAll() async {
     final endpoint = GetAllCountryEndpoint();
