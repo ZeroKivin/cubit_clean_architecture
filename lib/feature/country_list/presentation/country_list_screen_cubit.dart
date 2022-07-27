@@ -4,13 +4,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'country_list_state.dart';
+part 'country_list_screen_state.dart';
 
-class CountryListCubit extends Cubit<CountryListState> {
-  CountryListCubit({
+class CountryListScreenCubit extends Cubit<CountryListScreenState> {
+  CountryListScreenCubit({
     required this.useCase,
     required this.scaffoldMessengerKey,
-  }) : super(const CountryListState());
+  }) : super(const CountryListScreenState());
 
   final CountryCase useCase;
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey;
@@ -28,16 +28,17 @@ class CountryListCubit extends Cubit<CountryListState> {
   }
 
   Future<void> _loadCountryList() async {
-    emit(state.copyWith(status: CountryListStatus.loading));
+    emit(state.copyWith(status: CountryListScreenStatus.loading));
     try {
       final countries = await useCase.getAllCountries();
+
       return emit(state.copyWith(
-        status: CountryListStatus.success,
+        status: CountryListScreenStatus.success,
         countries: countries,
       ));
     } catch (error) {
       emit(state.copyWith(
-        status: CountryListStatus.error,
+        status: CountryListScreenStatus.error,
         errorText: 'При загрузке данных произошла ошибка',
       ));
     }

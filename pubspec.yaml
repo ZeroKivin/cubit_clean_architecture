@@ -12,23 +12,21 @@ dependencies:
   flutter:
     sdk: flutter
 
-  clean_business_logic:
-    git:
-      url: 'https://github.com/ZeroKivin/clean_business_logic.git'
-
   cupertino_icons: ^1.0.2
   flutter_bloc:
   provider:
   json_annotation:
   equatable:
   logger:
+  kiwi:
+  dio:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
-  retrofit_generator:
+  dart_code_metrics:
   build_runner:
   json_serializable:
 

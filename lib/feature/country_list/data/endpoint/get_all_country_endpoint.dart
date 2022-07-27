@@ -1,4 +1,4 @@
-import 'package:clean_business_logic/clean_business_logic.dart';
+import 'package:cubit_clean_architecture/utility/url/endpoint.dart';
 import 'package:cubit_clean_architecture/utility/url/remote_config.dart';
 import 'package:cubit_clean_architecture/utility/url/url.dart';
 
@@ -7,7 +7,7 @@ class GetAllCountryEndpoint extends Endpoint {
   final String url = Url.allCountries;
 
   @override
-  Uri create() {
+  Uri createUri() {
     return Uri.https(api, url);
   }
 }

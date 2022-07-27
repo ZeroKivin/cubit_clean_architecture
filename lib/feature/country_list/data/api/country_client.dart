@@ -1,22 +1,21 @@
-import 'package:clean_business_logic/clean_business_logic.dart';
 import 'package:cubit_clean_architecture/feature/country_list/data/dto/country_data.dart';
-import 'package:cubit_clean_architecture/feature/country_list/data/endpoint/get_all_country.dart';
-import 'package:cubit_clean_architecture/utility/logger/logger.dart';
+import 'package:cubit_clean_architecture/feature/country_list/data/endpoint/get_all_country_endpoint.dart';
+import 'package:cubit_clean_architecture/utility/logger/logger_mixin.dart';
+import 'package:dio/dio.dart';
 
-class CountryClient extends Client with HttpClient {
-  CountryClient(DefaultLogger logger) : super(logger: logger);
+class CountryClient with LoggerMixin {
+  CountryClient({required this.httpClient});
+
+  final Dio httpClient;
 
   Future<List<CountryData>> getAll() async {
     final endpoint = GetAllCountryEndpoint();
-    final url = createUrl<GetAllCountryEndpoint>(endpoint);
+    final url = endpoint.createUrl();
 
     log('GET $url');
-    final response = await httpClient.get<List<dynamic>>(url);
+    final response = await httpClient.get(url);
+    final data = List<Map<String, dynamic>>.from(response.data ?? []);
 
-    final data = response.data!;
-
-    return data
-        .map((dynamic i) => CountryData.fromJson(i as Map<String, dynamic>))
-        .toList();
+    return data.map(CountryData.fromJson).toList();
   }
 }

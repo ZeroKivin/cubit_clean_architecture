@@ -1,6 +1,6 @@
-import 'package:clean_business_logic/clean_business_logic.dart';
+import 'package:equatable/equatable.dart';
 
-class Country extends Entity {
+class Country extends Equatable {
   const Country({
     required this.flag,
     required this.name,
@@ -10,6 +10,8 @@ class Country extends Entity {
   final String flag;
 
   @override
+  List<Object?> get props => [name, flag];
+
   Country copyWith({
     String? name,
     String? flag,
@@ -19,7 +21,4 @@ class Country extends Entity {
       flag: flag ?? this.flag,
     );
   }
-
-  @override
-  List<Object?> get props => [name, flag];
 }

@@ -1,5 +1,5 @@
 import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country_case.dart';
-import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_cubit.dart';
+import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_screen_cubit.dart';
 import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,8 +9,8 @@ class CountryListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CountryListCubit>(
-      create: (context) => CountryListCubit(
+    return BlocProvider<CountryListScreenCubit>(
+      create: (context) => CountryListScreenCubit(
         useCase: context.read<CountryCase>(),
         scaffoldMessengerKey: context.read<GlobalKey<ScaffoldMessengerState>>(),
       )..init(),

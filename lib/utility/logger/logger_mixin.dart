@@ -1,7 +1,6 @@
-import 'package:clean_business_logic/scr/logger/logger.dart';
 import 'package:logger/logger.dart';
 
-class DefaultLogger extends AppLogger {
+mixin LoggerMixin {
   final Logger logger = Logger(
     printer: PrettyPrinter(
       methodCount: 4,
@@ -9,7 +8,6 @@ class DefaultLogger extends AppLogger {
     ),
   );
 
-  @override
   void log(Object message) {
     logger.i(message);
   }

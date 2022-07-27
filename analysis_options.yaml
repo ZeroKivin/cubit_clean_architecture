@@ -1,29 +1,85 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
-
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
-linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at
-  # https://dart-lang.github.io/linter/lints/index.html.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
-  rules:
-  # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-  # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+analyzer:
+  plugins:
+    - dart_code_metrics
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+    cyclomatic-complexity: 20
+    source-lines-of-code: 60
+    maintainability-index: 50
+    number-of-parameters: 3
+    number-of-methods: 10
+    maximum-nesting-level: 5
+  metrics-exclude:
+    - test/**
+  rules:
+    - list_remove_unrelated_type
+    - iterable_contains_unrelated_type
+    - avoid-duplicate-exports
+    - avoid-dynamic:
+        exclude:
+          - lib/feature/*/data/api/**
+    - avoid-global-state
+    - avoid-missing-enum-constant-in-map
+    - avoid-nested-conditional-expressions
+    - avoid-non-null-assertion
+    - avoid-throw-in-catch-block
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-unused-parameters
+    - binary-expression-operand-order
+    - double-literal-format
+    - format-comment
+    - member-ordering-extended:
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+          - factory-constructors
+          - public-getters
+          - private-getters
+          - public-setters
+          - private-setters
+          - public-methods
+          - private-methods
+    - newline-before-return:
+        severity: style
+    - no-boolean-literal-compare
+    - no-empty-block:
+        severity: warning
+    - prefer-trailing-comma:
+        severity: style
+    - prefer-conditional-expressions
+    - no-equal-then-else
+    - no-object-declaration
+    - prefer-commenting-analyzer-ignores
+    - prefer-correct-identifier-length
+    - prefer-correct-type-name
+    - prefer-enums-by-name
+    - prefer-first
+    - prefer-immediate-return
+    - prefer-last
+    - prefer-match-file-name:
+        exclude:
+          - test/**
+    - prefer-moving-to-variable
+    - always-remove-listener
+    - avoid-border-all
+    - avoid-returning-widgets
+    - avoid-shrink-wrap-in-lists
+    - avoid-unnecessary-setstate
+    - avoid-use-expanded-as-spacer
+    - avoid-wrapping-in-padding
+    - prefer-const-border-radius
+    - prefer-correct-edge-insets-constructor
+    - prefer-extracting-callbacks:
+        ignored-named-arguments:
+          - listener
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true

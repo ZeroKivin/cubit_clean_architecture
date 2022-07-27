@@ -1,10 +1,6 @@
-import 'package:cubit_clean_architecture/feature/country_list/data/api/country_client.dart';
-import 'package:cubit_clean_architecture/feature/country_list/data/repository/country_repository.dart';
-import 'package:cubit_clean_architecture/feature/country_list/domain/repository/country_repository.dart';
 import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country_case.dart';
 import 'package:cubit_clean_architecture/internal/app.dart';
-import 'package:cubit_clean_architecture/utility/error/error_handler.dart';
-import 'package:cubit_clean_architecture/utility/logger/logger.dart';
+import 'package:cubit_clean_architecture/internal/injector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,32 +17,20 @@ class AppDependencies extends StatefulWidget {
 }
 
 class _AppDependenciesState extends State<AppDependencies> {
-  late final DefaultLogger _logger;
-  late final DefaultErrorHandler _errorHandler;
-  late final CountryClient _countryClient;
-  late final ICountryRepository _countryRepository;
-  late final CountryCase _countryUseCase;
+  late final Injector _injector;
   late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
+  late final CountryCase _countryUseCase;
 
   @override
   void initState() {
     super.initState();
 
-    _scaffoldMessengerKey = GlobalKey();
+    _injector = Injector();
+    _injector.setUpProductionMode();
 
-    _logger = DefaultLogger();
-    _errorHandler = DefaultErrorHandler();
+    _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-    _countryClient = CountryClient(_logger);
-    _countryRepository = CountryRepository(
-      client: _countryClient,
-      logger: _logger,
-    );
-    _countryUseCase = CountryCase(
-      repository: _countryRepository,
-      logger: _logger,
-      errorHandler: _errorHandler,
-    );
+    _countryUseCase = _injector.container.resolve<CountryCase>();
   }
 
   @override
@@ -58,7 +42,7 @@ class _AppDependenciesState extends State<AppDependencies> {
         ),
         Provider<GlobalKey<ScaffoldMessengerState>>(
           create: (_) => _scaffoldMessengerKey,
-        )
+        ),
       ],
       child: widget.app,
     );

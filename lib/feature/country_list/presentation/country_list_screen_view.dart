@@ -1,5 +1,5 @@
 import 'package:cubit_clean_architecture/feature/country_list/domain/entity/country.dart';
-import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_cubit.dart';
+import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +8,7 @@ class CountryListScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<CountryListCubit>();
+    final bloc = context.read<CountryListScreenCubit>();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -19,13 +19,13 @@ class CountryListScreenView extends StatelessWidget {
         onPressed: bloc.refresh,
         child: const Icon(Icons.refresh),
       ),
-      body: BlocConsumer<CountryListCubit, CountryListState>(
+      body: BlocConsumer<CountryListScreenCubit, CountryListScreenState>(
         listener: (context, state) {
-          if (state.status == CountryListStatus.error) {
+          if (state.status == CountryListScreenStatus.error) {
             bloc.showErrorSnackBar(
               SnackBar(
                 content: Text(
-                  state.errorText!,
+                  state.errorText ?? '',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 13,
@@ -36,7 +36,7 @@ class CountryListScreenView extends StatelessWidget {
           }
         },
         builder: (_, state) {
-          if (state.status == CountryListStatus.loading) {
+          if (state.status == CountryListScreenStatus.loading) {
             return const _Loading();
           }
 
@@ -64,14 +64,14 @@ class _Loading extends StatelessWidget {
 }
 
 class _CountryList extends StatelessWidget {
-  final Iterable<Country>? countries;
-  final TextStyle nameStyle;
-
   const _CountryList({
     Key? key,
     required this.countries,
     required this.nameStyle,
   }) : super(key: key);
+
+  final Iterable<Country>? countries;
+  final TextStyle nameStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -94,25 +94,29 @@ class _CountryList extends StatelessWidget {
 }
 
 class _CountryWidget extends StatelessWidget {
-  final Country data;
-  final TextStyle countryNameStyle;
-
   const _CountryWidget({
     Key? key,
     required this.data,
     required this.countryNameStyle,
   }) : super(key: key);
 
+  final Country data;
+  final TextStyle countryNameStyle;
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(8.0),
+        ),
       ),
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8.0),
+            ),
             child: Container(
               transform: Matrix4.rotationZ(-0.2)
                 ..scale(1.2)
@@ -137,8 +141,10 @@ class _CountryWidget extends StatelessWidget {
                     const Spacer(),
                     Container(
                       constraints: constraints.copyWith(minWidth: 0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
+                        ),
                         color: Colors.white70,
                       ),
                       padding: const EdgeInsets.all(8.0),
@@ -153,7 +159,7 @@ class _CountryWidget extends StatelessWidget {
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );
