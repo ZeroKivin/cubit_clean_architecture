@@ -1,7 +1,7 @@
-part of 'country_list_screen_cubit.dart';
+part of 'country_list_cubit.dart';
 
-class CountryListScreenState extends Equatable {
-  const CountryListScreenState({
+class CountryListState extends Equatable {
+  const CountryListState({
     this.status = CountryListScreenStatus.loading,
     this.countries = const <Country>[],
     this.errorText,
@@ -14,12 +14,12 @@ class CountryListScreenState extends Equatable {
   @override
   List<Object?> get props => [status, countries, errorText];
 
-  CountryListScreenState copyWith({
+  CountryListState copyWith({
     CountryListScreenStatus? status,
     Iterable<Country>? countries,
     String? errorText,
   }) {
-    return CountryListScreenState(
+    return CountryListState(
       status: status ?? this.status,
       countries: countries ?? this.countries,
       errorText: errorText,

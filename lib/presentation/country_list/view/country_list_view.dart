@@ -1,14 +1,14 @@
 import 'package:cubit_clean_architecture/feature/country_list/domain/entity/country.dart';
-import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_screen_cubit.dart';
+import 'package:cubit_clean_architecture/presentation/country_list/country_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CountryListScreenView extends StatelessWidget {
-  const CountryListScreenView({Key? key}) : super(key: key);
+class CountryListView extends StatelessWidget {
+  const CountryListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<CountryListScreenCubit>();
+    final bloc = context.read<CountryListCubit>();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -19,7 +19,7 @@ class CountryListScreenView extends StatelessWidget {
         onPressed: bloc.refresh,
         child: const Icon(Icons.refresh),
       ),
-      body: BlocConsumer<CountryListScreenCubit, CountryListScreenState>(
+      body: BlocConsumer<CountryListCubit, CountryListState>(
         listener: (context, state) {
           if (state.status == CountryListScreenStatus.error) {
             bloc.showErrorSnackBar(

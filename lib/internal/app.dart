@@ -1,5 +1,5 @@
-import 'package:cubit_clean_architecture/feature/country_list/presentation/country_list_screen.dart';
-import 'package:cubit_clean_architecture/feature/navigation/app_navigator.dart';
+import 'package:cubit_clean_architecture/presentation/country_list/country_list.dart';
+import 'package:cubit_clean_architecture/presentation/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
