@@ -1,5 +1,4 @@
-import 'package:cubit_clean_architecture/feature/country_list/data/dto/country_data.dart';
-import 'package:cubit_clean_architecture/feature/country_list/domain/entity/country.dart';
+import 'package:cubit_clean_architecture/feature/country_list/country_list.dart';
 
 Country mapCountry(CountryData data) {
   return Country(

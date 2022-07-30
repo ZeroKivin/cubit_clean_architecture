@@ -1,5 +1,4 @@
-import 'package:cubit_clean_architecture/feature/country_list/data/dto/country_data.dart';
-import 'package:cubit_clean_architecture/feature/country_list/data/endpoint/get_all_country_endpoint.dart';
+import 'package:cubit_clean_architecture/feature/country_list/country_list.dart';
 import 'package:dio/dio.dart';
 
 class CountryListClient {

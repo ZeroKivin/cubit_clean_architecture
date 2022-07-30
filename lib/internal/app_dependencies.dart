@@ -1,4 +1,4 @@
-import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country_case.dart';
+import 'package:cubit_clean_architecture/feature/country_list/country_list.dart';
 import 'package:cubit_clean_architecture/internal/app.dart';
 import 'package:cubit_clean_architecture/internal/injector.dart';
 import 'package:flutter/material.dart';

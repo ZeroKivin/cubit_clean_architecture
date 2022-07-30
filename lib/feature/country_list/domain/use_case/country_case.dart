@@ -1,5 +1,4 @@
-import 'package:cubit_clean_architecture/feature/country_list/domain/entity/country.dart';
-import 'package:cubit_clean_architecture/feature/country_list/domain/repository/i_country_repository.dart';
+import 'package:cubit_clean_architecture/feature/country_list/country_list.dart';
 import 'package:cubit_clean_architecture/utility/error/error_handler_mixin.dart';
 
 class CountryCase with ErrorHandlerMixin {

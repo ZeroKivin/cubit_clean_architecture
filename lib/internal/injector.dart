@@ -1,6 +1,4 @@
-import 'package:cubit_clean_architecture/feature/country_list/data/api/country_list_client.dart';
-import 'package:cubit_clean_architecture/feature/country_list/data/repository/country_repository.dart';
-import 'package:cubit_clean_architecture/feature/country_list/domain/use_case/country_case.dart';
+import 'package:cubit_clean_architecture/feature/country_list/country_list.dart';
 import 'package:dio/dio.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
