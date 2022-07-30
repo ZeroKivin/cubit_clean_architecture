@@ -5,7 +5,7 @@ class CountryRepository implements ICountryRepository {
     required this.client,
   });
 
-  final CountryListClient client;
+  final CountryListService client;
 
   @override
   Future<Iterable<Country>> getAllCountries() => client.getAllCountries().then(

@@ -1,3 +1,3 @@
-class RemoteConfig {
+abstract class RemoteConfig {
   static const String defaultApi = 'restcountries.com';
 }

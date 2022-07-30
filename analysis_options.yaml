@@ -24,6 +24,7 @@ dart_code_metrics:
     - avoid-dynamic:
         exclude:
           - lib/feature/*/data/api/**
+          - lib/routing/root_router_delegate.dart
     - avoid-global-state
     - avoid-missing-enum-constant-in-map
     - avoid-nested-conditional-expressions
@@ -59,7 +60,8 @@ dart_code_metrics:
     - no-equal-then-else
     - no-object-declaration
     - prefer-commenting-analyzer-ignores
-    - prefer-correct-identifier-length
+    - prefer-correct-identifier-length:
+        exceptions: [ 'i' ]
     - prefer-correct-type-name
     - prefer-enums-by-name
     - prefer-first

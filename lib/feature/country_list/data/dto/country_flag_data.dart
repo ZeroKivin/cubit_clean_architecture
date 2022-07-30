@@ -1,3 +1,4 @@
+import 'package:cubit_clean_architecture/utility/types/types.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'country_flag_data.g.dart';
@@ -12,8 +13,8 @@ class CountryFlagData {
   final String png;
   final String svg;
 
-  factory CountryFlagData.fromJson(Map<String, dynamic> json) =>
+  factory CountryFlagData.fromJson(Json json) =>
       _$CountryFlagDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CountryFlagDataToJson(this);
+  Json toJson() => _$CountryFlagDataToJson(this);
 }

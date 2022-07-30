@@ -1,30 +1,34 @@
 part of 'country_list_cubit.dart';
 
-class CountryListState extends Equatable {
-  const CountryListState({
-    this.status = CountryListScreenStatus.loading,
-    this.countries = const <Country>[],
-    this.errorText,
-  });
-
-  final CountryListScreenStatus status;
-  final Iterable<Country> countries;
-  final String? errorText;
-
-  @override
-  List<Object?> get props => [status, countries, errorText];
-
-  CountryListState copyWith({
-    CountryListScreenStatus? status,
-    Iterable<Country>? countries,
-    String? errorText,
-  }) {
-    return CountryListState(
-      status: status ?? this.status,
-      countries: countries ?? this.countries,
-      errorText: errorText,
-    );
-  }
+abstract class CountryListState extends Equatable {
+  const CountryListState();
 }
 
-enum CountryListScreenStatus { loading, success, error }
+class CountryListLoading extends CountryListState {
+  const CountryListLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CountryListError extends CountryListState {
+  const CountryListError({
+    this.errorText = 'Неизвестная ошибка',
+  });
+
+  final String errorText;
+
+  @override
+  List<Object> get props => [errorText];
+}
+
+class CountryListSuccess extends CountryListState {
+  const CountryListSuccess({
+    required this.countries,
+  });
+
+  final Iterable<Country> countries;
+
+  @override
+  List<Object> get props => [countries];
+}

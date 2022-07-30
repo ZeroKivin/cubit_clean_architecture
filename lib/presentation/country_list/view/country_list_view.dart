@@ -1,4 +1,5 @@
 import 'package:cubit_clean_architecture/feature/country_list/country_list.dart';
+import 'package:cubit_clean_architecture/presentation/component/component.dart';
 import 'package:cubit_clean_architecture/presentation/country_list/country_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,17 +16,13 @@ class CountryListView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Список стран'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: bloc.refresh,
-        child: const Icon(Icons.refresh),
-      ),
       body: BlocConsumer<CountryListCubit, CountryListState>(
         listener: (context, state) {
-          if (state.status == CountryListScreenStatus.error) {
+          if (state is CountryListError) {
             bloc.showErrorSnackBar(
               SnackBar(
                 content: Text(
-                  state.errorText ?? '',
+                  state.errorText,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 13,
@@ -36,14 +33,16 @@ class CountryListView extends StatelessWidget {
           }
         },
         builder: (_, state) {
-          if (state.status == CountryListScreenStatus.loading) {
+          if (state is CountryListLoading) {
             return const _Loading();
+          } else if (state is CountryListSuccess) {
+            return _CountryList(
+              countries: state.countries,
+              onCardTap: bloc.openCard,
+            );
           }
 
-          return _CountryList(
-            countries: state.countries,
-            nameStyle: const TextStyle(fontSize: 14),
-          );
+          return Container();
         },
       ),
     );
@@ -67,11 +66,11 @@ class _CountryList extends StatelessWidget {
   const _CountryList({
     Key? key,
     required this.countries,
-    required this.nameStyle,
+    required this.onCardTap,
   }) : super(key: key);
 
   final Iterable<Country>? countries;
-  final TextStyle nameStyle;
+  final Function(Country) onCardTap;
 
   @override
   Widget build(BuildContext context) {
@@ -82,86 +81,18 @@ class _CountryList extends StatelessWidget {
     }
 
     return ListView.separated(
-      itemBuilder: (_, index) => _CountryWidget(
-        data: countries.elementAt(index),
-        countryNameStyle: nameStyle,
-      ),
+      itemBuilder: (_, index) {
+        final country = countries.elementAt(index);
+
+        return CountryCard(
+          flag: country.flag,
+          name: country.name,
+          onTap: () => onCardTap(country),
+        );
+      },
       separatorBuilder: (_, __) => const SizedBox(height: 8),
       itemCount: countries.length,
       cacheExtent: 800,
-    );
-  }
-}
-
-class _CountryWidget extends StatelessWidget {
-  const _CountryWidget({
-    Key? key,
-    required this.data,
-    required this.countryNameStyle,
-  }) : super(key: key);
-
-  final Country data;
-  final TextStyle countryNameStyle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(8.0),
-        ),
-      ),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(8.0),
-            ),
-            child: Container(
-              transform: Matrix4.rotationZ(-0.2)
-                ..scale(1.2)
-                ..translate(-50.0),
-              height: 250,
-              width: double.infinity,
-              child: Image.network(
-                data.flag,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 10,
-            left: 10,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Row(
-                  children: [
-                    const Spacer(),
-                    Container(
-                      constraints: constraints.copyWith(minWidth: 0),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8.0),
-                        ),
-                        color: Colors.white70,
-                      ),
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        data.name,
-                        style: countryNameStyle,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

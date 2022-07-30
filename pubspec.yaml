@@ -21,6 +21,7 @@ dependencies:
   kiwi:
   dio:
   pretty_dio_logger:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

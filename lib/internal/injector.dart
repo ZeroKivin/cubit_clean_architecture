@@ -17,11 +17,11 @@ class Injector {
     container.registerInstance(dio);
 
     container.registerFactory(
-      (container) => CountryListClient(httpClient: container.resolve<Dio>()),
+      (container) => CountryListService(httpClient: container.resolve<Dio>()),
     );
     container.registerFactory(
-      (container) =>
-          CountryRepository(client: container.resolve<CountryListClient>()),
+          (container) =>
+          CountryRepository(client: container.resolve<CountryListService>()),
     );
     container.registerFactory(
       (container) =>

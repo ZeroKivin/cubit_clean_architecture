@@ -1,3 +1,4 @@
+import 'package:cubit_clean_architecture/utility/types/types.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'country_name_data.g.dart';
@@ -12,8 +13,8 @@ class CountryNameData {
   final String common;
   final String official;
 
-  factory CountryNameData.fromJson(Map<String, dynamic> json) =>
+  factory CountryNameData.fromJson(Json json) =>
       _$CountryNameDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CountryNameDataToJson(this);
+  Json toJson() => _$CountryNameDataToJson(this);
 }
