@@ -43,7 +43,8 @@ class CountryListCubit extends Cubit<CountryListState> {
       return emit(CountryListSuccess(countries: countries));
     } catch (_) {
       emit(const CountryListError(
-          errorText: 'При загрузке данных произошла ошибка'));
+        errorText: 'При загрузке данных произошла ошибка',
+      ));
     }
   }
 }

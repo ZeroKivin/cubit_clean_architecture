@@ -1,5 +1,6 @@
 import 'package:cubit_clean_architecture/presentation/component/component.dart';
 import 'package:cubit_clean_architecture/utility/types/types.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CountryInfoView extends StatelessWidget {
@@ -27,7 +28,7 @@ class CountryInfoView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text('Описание этой страны (его нет в api)'),
+            const Text('description').tr(),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:cubit_clean_architecture/navigation/navigation.dart';
 import 'package:cubit_clean_architecture/presentation/presentation.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,9 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: scaffoldMessengerKey,
       navigatorKey: navigation.rootNavigatorKey,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
         fontFamily: GoogleFonts.poppins().fontFamily,

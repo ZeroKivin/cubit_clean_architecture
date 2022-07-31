@@ -2,6 +2,7 @@ import 'package:cubit_clean_architecture/feature/country_list/country_list.dart'
 import 'package:cubit_clean_architecture/internal/app.dart';
 import 'package:cubit_clean_architecture/internal/injector.dart';
 import 'package:cubit_clean_architecture/navigation/navigation.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,12 @@ class _AppDependenciesState extends State<AppDependencies> {
           create: (_) => _countryUseCase,
         ),
       ],
-      child: widget.app,
+      child: EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ru')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('en'),
+        child: widget.app,
+      ),
     );
   }
 }
