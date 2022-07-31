@@ -32,6 +32,9 @@ dev_dependencies:
   dart_code_metrics: ^4.17.0
   build_runner: ^2.2.0
   json_serializable: ^6.3.1
+  mocktail:
+  mocktail_image_network:
+  golden_toolkit:
 
 flutter:
   uses-material-design: true
